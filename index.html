@@ -3,80 +3,520 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A-10 C.O. Research Labs — Intro Test</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif}
-body{overflow:hidden}
-.intro-screen{position:fixed;inset:0;z-index:9999;width:100vw;height:100vh;background:#000;display:flex;justify-content:center;align-items:center}
-.intro-video{width:62vw;height:62vh;max-width:1100px;max-height:620px;object-fit:contain;background:#000;display:none}
-.enter-button{padding:14px 34px;border:1px solid #5fdcff;border-radius:999px;background:rgba(0,20,45,.75);color:#fff;font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer;box-shadow:0 0 12px rgba(95,220,255,.8),inset 0 0 10px rgba(95,220,255,.35);transition:.25s ease}
-.enter-button:hover{color:#5fdcff;box-shadow:0 0 20px rgba(95,220,255,1),0 0 40px rgba(95,220,255,.7)}
-.home-test{width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;background:radial-gradient(circle at 50% 35%,rgba(23,141,255,.18),transparent 35%),#020711;text-align:center;padding:40px}
-.home-test img{width:min(520px,78vw);max-height:55vh;object-fit:contain;border-radius:24px}
-.home-test p{color:#9eb3c7;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
-.status{color:#49e8ff;font-size:12px;letter-spacing:.08em}
-</style>
-</head>
-<body>
-<section class="intro-screen" id="introScreen">
-<button id="enterButton" class="enter-button" type="button">ENTER A-10 C.O. RESEARCH LABS</button>
-<video id="introVideo" class="intro-video" playsinline preload="auto">
-<source src="a10-research-labs-intro.mp4" type="video/mp4">
-</video>
-</section>
-<main class="home-test">
-<img src="a10-logo.jpg" alt="A-10 C.O. Research Labs">
-<p>Clean repository playback test</p>
-<div class="status" id="statusText">Waiting for intro…</div>
-</main>
-<audio id="ambientAudio" loop preload="auto">
-<source src="a10-labs-ambient-compatible.mp3" type="audio/mpeg">
-</audio>
-<script>
-const enterButton=document.getElementById("enterButton");
-const introVideo=document.getElementById("introVideo");
-const introScreen=document.getElementById("introScreen");
-const ambientAudio=document.getElementById("ambientAudio");
-const statusText=document.getElementById("statusText");
 
-function finishIntro(){
-  introScreen.style.display="none";
-  document.body.style.overflow="auto";
-  if(!ambientAudio.paused){
-    ambientAudio.volume=0.34;
-    statusText.textContent="Intro OK · Ambient music ON";
-  }else{
-    statusText.textContent="Intro OK · Ambient music did not start";
-  }
+<title>A-10 C.O. Research Labs — Intro Test</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-enterButton.addEventListener("click",()=>{
-  enterButton.style.display="none";
-  introVideo.style.display="block";
-  introVideo.currentTime=0;
-  introVideo.muted=false;
-  ambientAudio.volume=0;
+html,
+body{
+  width:100%;
+  height:100%;
+  background:#000;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-  const ambientPromise=ambientAudio.play();
-  if(ambientPromise&&typeof ambientPromise.catch==="function"){
-    ambientPromise.catch(error=>console.warn("Ambient audio start failed:",error));
+body{
+  overflow:hidden;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro-screen{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  width:100vw;
+  height:100vh;
+
+  background:#000;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.intro-video{
+  width:62vw;
+  height:62vh;
+
+  max-width:1100px;
+  max-height:620px;
+
+  object-fit:contain;
+
+  background:#000;
+
+  display:none;
+}
+
+.enter-button{
+  padding:14px 34px;
+
+  border:1px solid #5fdcff;
+  border-radius:999px;
+
+  background:rgba(0,20,45,.75);
+
+  color:#fff;
+
+  font-size:13px;
+  font-weight:700;
+
+  letter-spacing:2px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 12px rgba(95,220,255,.8),
+    inset 0 0 10px rgba(95,220,255,.35);
+
+  transition:.25s ease;
+}
+
+.enter-button:hover{
+  color:#5fdcff;
+
+  box-shadow:
+    0 0 20px rgba(95,220,255,1),
+    0 0 40px rgba(95,220,255,.7);
+}
+
+
+/* =========================================
+   TEST HOME
+========================================= */
+
+.home-test{
+  width:100%;
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+  align-items:center;
+
+  gap:24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(23,141,255,.18),
+      transparent 35%
+    ),
+    #020711;
+
+  text-align:center;
+
+  padding:40px;
+}
+
+.home-test img{
+  width:min(520px,78vw);
+
+  max-height:55vh;
+
+  object-fit:contain;
+
+  border-radius:24px;
+}
+
+.home-test p{
+  color:#9eb3c7;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  font-size:12px;
+}
+
+.status{
+  color:#49e8ff;
+
+  font-size:12px;
+
+  letter-spacing:.08em;
+}
+
+
+/* =========================================
+   AMBIENT BUTTON
+========================================= */
+
+.ambient-btn{
+  position:fixed;
+
+  right:18px;
+  bottom:18px;
+
+  z-index:1000;
+
+  min-height:42px;
+
+  padding:0 14px;
+
+  border:1px solid #49e8ff;
+
+  border-radius:999px;
+
+  background:rgba(2,7,17,.90);
+
+  color:#dffbff;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:.10em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 12px rgba(73,232,255,.35),
+    0 12px 30px rgba(0,0,0,.24);
+
+  transition:.25s ease;
+}
+
+.ambient-btn:hover{
+  color:#49e8ff;
+
+  box-shadow:
+    0 0 18px rgba(73,232,255,.65),
+    0 12px 30px rgba(0,0,0,.24);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     INTRO SCREEN
+========================================= -->
+
+<section
+  class="intro-screen"
+  id="introScreen"
+>
+
+  <button
+    id="enterButton"
+    class="enter-button"
+    type="button"
+  >
+    ENTER A-10 C.O. RESEARCH LABS
+  </button>
+
+
+  <video
+    id="introVideo"
+    class="intro-video"
+    playsinline
+    preload="auto"
+  >
+
+    <source
+      src="a10-research-labs-intro.mp4"
+      type="video/mp4"
+    >
+
+  </video>
+
+</section>
+
+
+<!-- =========================================
+     TEST HOME
+========================================= -->
+
+<main class="home-test">
+
+  <img
+    src="a10-logo.jpg"
+    alt="A-10 C.O. Research Labs"
+  >
+
+  <p>
+    Clean repository playback test
+  </p>
+
+  <div
+    class="status"
+    id="statusText"
+  >
+    Waiting for intro…
+  </div>
+
+</main>
+
+
+<!-- =========================================
+     AMBIENT BUTTON
+========================================= -->
+
+<button
+  id="ambientToggle"
+  class="ambient-btn"
+  type="button"
+>
+  Ambient · On
+</button>
+
+
+<!-- =========================================
+     AMBIENT AUDIO
+========================================= -->
+
+<audio
+  id="ambientAudio"
+  loop
+  preload="auto"
+>
+
+  <source
+    src="a10-labs-ambient-compatible.mp3"
+    type="audio/mpeg"
+  >
+
+</audio>
+
+
+<script>
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const enterButton =
+  document.getElementById("enterButton");
+
+const introVideo =
+  document.getElementById("introVideo");
+
+const introScreen =
+  document.getElementById("introScreen");
+
+const ambientAudio =
+  document.getElementById("ambientAudio");
+
+const statusText =
+  document.getElementById("statusText");
+
+const ambientToggle =
+  document.getElementById("ambientToggle");
+
+
+/* =========================================
+   FINISH INTRO
+========================================= */
+
+function finishIntro(){
+
+  introScreen.style.display = "none";
+
+  document.body.style.overflow = "auto";
+
+
+  if(!ambientAudio.paused){
+
+    ambientAudio.volume = 0.34;
+
+    statusText.textContent =
+      "Intro OK · Ambient music ON";
+
+    ambientToggle.textContent =
+      "Ambient · On";
+
   }
 
-  const videoPromise=introVideo.play();
-  if(videoPromise&&typeof videoPromise.catch==="function"){
-    videoPromise.catch(error=>{
-      console.error("Intro video start failed:",error);
-      statusText.textContent="Intro video failed";
-    });
-  }
-});
+  else{
 
-introVideo.addEventListener("ended",finishIntro);
-introVideo.addEventListener("error",()=>{
-  console.error("Could not load a10-research-labs-intro.mp4");
-  statusText.textContent="Intro video file failed to load";
-});
+    statusText.textContent =
+      "Intro OK · Ambient music did not start";
+
+    ambientToggle.textContent =
+      "Ambient · Off";
+
+  }
+
+}
+
+
+/* =========================================
+   ENTER BUTTON
+========================================= */
+
+enterButton.addEventListener(
+  "click",
+  () => {
+
+    enterButton.style.display =
+      "none";
+
+    introVideo.style.display =
+      "block";
+
+    introVideo.currentTime = 0;
+
+    introVideo.muted = false;
+
+
+    /*
+      MUSIC STARTS SILENTLY
+      DURING INTRO
+    */
+
+    ambientAudio.volume = 0;
+
+
+    const ambientPromise =
+      ambientAudio.play();
+
+
+    if(
+      ambientPromise &&
+      typeof ambientPromise.catch === "function"
+    ){
+
+      ambientPromise.catch(
+        error => {
+
+          console.warn(
+            "Ambient audio start failed:",
+            error
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+      START INTRO VIDEO
+    */
+
+    const videoPromise =
+      introVideo.play();
+
+
+    if(
+      videoPromise &&
+      typeof videoPromise.catch === "function"
+    ){
+
+      videoPromise.catch(
+        error => {
+
+          console.error(
+            "Intro video start failed:",
+            error
+          );
+
+          statusText.textContent =
+            "Intro video failed";
+
+        }
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   AMBIENT ON / OFF
+========================================= */
+
+ambientToggle.addEventListener(
+  "click",
+  async () => {
+
+    if(!ambientAudio.paused){
+
+      ambientAudio.pause();
+
+      ambientToggle.textContent =
+        "Ambient · Off";
+
+      return;
+
+    }
+
+
+    try{
+
+      ambientAudio.volume = 0.34;
+
+      await ambientAudio.play();
+
+      ambientToggle.textContent =
+        "Ambient · On";
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Unable to resume ambient audio:",
+        error
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   INTRO FINISHED
+========================================= */
+
+introVideo.addEventListener(
+  "ended",
+  finishIntro
+);
+
+
+/* =========================================
+   INTRO ERROR
+========================================= */
+
+introVideo.addEventListener(
+  "error",
+  () => {
+
+    console.error(
+      "Could not load a10-research-labs-intro.mp4"
+    );
+
+    statusText.textContent =
+      "Intro video file failed to load";
+
+  }
+);
+
 </script>
+
+
 </body>
 </html>
