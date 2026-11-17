@@ -1932,8 +1932,10 @@
           introVideo.currentTime =
             0;
 
+          /* Keep intro video silent so iOS does not take audio focus
+             away from the ambient soundtrack started by this tap. */
           introVideo.muted =
-            false;
+            true;
 
           /* Start audible ambient music with the visitor's entry gesture. */
           ambientAudio.currentTime =
@@ -1945,7 +1947,7 @@
           const ambientPromise =
             ambientAudio.play();
 
-          setAmbientButton(true);
+          setAmbientButton(!ambientAudio.paused);
 
           if (
             ambientPromise &&
