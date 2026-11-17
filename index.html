@@ -1919,80 +1919,51 @@
          User gesture starts BOTH intro and ambient audio.
       ====================================================== */
 
-      enterButton.addEventListener(
-        "click",
-        () => {
+      /* Start the soundtrack first, directly from the user's tap.
+         Muted video is started only after audio playback has settled. */
+      enterButton.addEventListener("click", () => {
+        enterButton.style.display = "none";
+        introVideo.style.display = "block";
+        introVideo.currentTime = 0;
+        introVideo.muted = true;
+        introVideo.setAttribute("muted", "");
 
-          enterButton.style.display =
-            "none";
+        ambientAudio.currentTime = 0;
+        ambientAudio.muted = false;
+        ambientAudio.volume = 0.34;
 
-          introVideo.style.display =
-            "block";
-
-          introVideo.currentTime =
-            0;
-
-          /* Keep intro video silent so iOS does not take audio focus
-             away from the ambient soundtrack started by this tap. */
-          introVideo.muted =
-            true;
-
-          /* Start audible ambient music with the visitor's entry gesture. */
-          ambientAudio.currentTime =
-            0;
-
-          ambientAudio.volume =
-            0.18;
-
-          const ambientPromise =
-            ambientAudio.play();
-
-          setAmbientButton(!ambientAudio.paused);
-
-          if (
-            ambientPromise &&
-            typeof ambientPromise.catch === "function"
-          ) {
-
-            ambientPromise.catch(
-              error => {
-
-                console.warn(
-                  "Ambient audio start failed:",
-                  error
-                );
-
-                setAmbientButton(false);
-
-              }
-            );
-
+        const startVideo = () => {
+          const attempt = introVideo.play();
+          if (attempt && typeof attempt.catch === "function") {
+            attempt.catch(error => console.error("Intro video start failed:", error));
           }
+        };
 
-          const videoPromise =
-            introVideo.play();
-
-          if (
-            videoPromise &&
-            typeof videoPromise.catch === "function"
-          ) {
-
-            videoPromise.catch(
-              error => {
-
-                console.error(
-                  "Intro video start failed:",
-                  error
-                );
-
-              }
-            );
-
+        try {
+          const attempt = ambientAudio.play();
+          if (attempt && typeof attempt.then === "function") {
+            attempt.then(() => {
+              setAmbientButton(true);
+              startVideo();
+            }).catch(error => {
+              console.warn("Ambient audio was blocked:", error);
+              setAmbientButton(false);
+              startVideo();
+            });
+          } else {
+            setAmbientButton(!ambientAudio.paused);
+            startVideo();
           }
-
+        } catch (error) {
+          console.warn("Ambient audio could not start:", error);
+          setAmbientButton(false);
+          startVideo();
         }
-      );
+      });
 
+      ambientAudio.addEventListener("play", () => setAmbientButton(true));
+      ambientAudio.addEventListener("pause", () => setAmbientButton(false));
+      ambientAudio.addEventListener("error", () => setAmbientButton(false));
 
       /* =====================================================
          AMBIENT ON / OFF
