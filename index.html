@@ -1888,29 +1888,11 @@
       ====================================================== */
 
       function finishIntro() {
-
-        introScreen.style.display =
-          "none";
-
-        document.body.style.overflow =
-          "auto";
-
-        document.body.style.overflowX =
-          "hidden";
-
-        if (!ambientAudio.paused) {
-
-          ambientAudio.volume =
-            0.34;
-
-          setAmbientButton(true);
-
-        } else {
-
-          setAmbientButton(false);
-
-        }
-
+        introCompleted = true;
+        introScreen.style.display = "none";
+        document.body.style.overflow = "auto";
+        document.body.style.overflowX = "hidden";
+        startAmbientAfterIntro();
       }
 
 
@@ -1919,94 +1901,84 @@
          User gesture starts BOTH intro and ambient audio.
       ====================================================== */
 
-      /* iOS: invoke both media play() calls synchronously inside ENTER tap.
-         A second user gesture retries the soundtrack if the browser blocks it. */
-      let soundtrackRequested = false;
-      const startSoundtrack = () => {
-        soundtrackRequested = true;
+      /* The logo film owns the soundtrack during the introduction.
+         Ambient audio is primed silently by the ENTER gesture and becomes
+         audible only after the film. */
+      let introCompleted = false;
+      let userDisabledAmbient = false;
+      let ambientPrimed = false;
+
+      const synchronizeAudioButton = () => {
+        setAmbientButton(introCompleted && !ambientAudio.paused && !userDisabledAmbient);
+      };
+
+      const startAmbientAfterIntro = () => {
+        if (userDisabledAmbient) return;
         ambientAudio.muted = false;
         ambientAudio.volume = 0.34;
-        const result = ambientAudio.play();
-        if (result && typeof result.then === "function") {
-          result.then(() => setAmbientButton(true))
-            .catch(error => {
-              console.warn("Soundtrack could not start:", error);
-              setAmbientButton(false);
+        if (ambientAudio.paused) {
+          const playback = ambientAudio.play();
+          if (playback && typeof playback.catch === "function") {
+            playback.catch(error => {
+              console.warn("Ambient playback requires a new gesture:", error);
+              synchronizeAudioButton();
             });
+          }
         }
+        synchronizeAudioButton();
       };
 
       enterButton.addEventListener("click", () => {
         enterButton.style.display = "none";
         introVideo.style.display = "block";
         introVideo.currentTime = 0;
-        introVideo.muted = true;
-        introVideo.setAttribute("muted", "");
+        introVideo.muted = false;
+        introVideo.removeAttribute("muted");
+
         ambientAudio.currentTime = 0;
-        startSoundtrack();
-        const videoResult = introVideo.play();
-        if (videoResult && typeof videoResult.catch === "function") {
-          videoResult.catch(error => console.warn("Intro video could not start:", error));
+        ambientAudio.muted = false;
+        ambientAudio.volume = 0;
+        /* This call must occur within the initial tap for iOS. */
+        const prime = ambientAudio.play();
+        if (prime && typeof prime.then === "function") {
+          prime.then(() => { ambientPrimed = true; })
+            .catch(error => console.warn("Ambient priming blocked:", error));
+        }
+
+        const introPlayback = introVideo.play();
+        if (introPlayback && typeof introPlayback.catch === "function") {
+          introPlayback.catch(error => {
+            console.error("Intro film playback failed:", error);
+            finishIntro();
+          });
         }
       });
 
-      /* Retry only when audio was requested and the browser declined the
-         initial gesture. Never override a visitor's deliberate mute. */
-      document.addEventListener("pointerdown", () => {
-        if (soundtrackRequested && ambientAudio.paused && !ambientAudio.dataset.userMuted) {
-          startSoundtrack();
-        }
-      }, {capture:true});
-
-      ambientAudio.addEventListener("playing", () => setAmbientButton(true));
-      ambientAudio.addEventListener("pause", () => setAmbientButton(false));
-      ambientAudio.addEventListener("error", () => setAmbientButton(false));
+      ambientAudio.addEventListener("playing", synchronizeAudioButton);
+      ambientAudio.addEventListener("pause", synchronizeAudioButton);
+      ambientAudio.addEventListener("error", synchronizeAudioButton);
 
       /* =====================================================
          AMBIENT ON / OFF
       ====================================================== */
 
-      ambientToggle.addEventListener(
-        "click",
-        async () => {
-
-          if (!ambientAudio.paused) {
-
-            ambientAudio.dataset.userMuted = "true";
-            ambientAudio.pause();
-
-            setAmbientButton(false);
-
-            return;
-
-          }
-
-          try {
-
-            delete ambientAudio.dataset.userMuted;
-            ambientAudio.volume =
-              0.34;
-
-            await ambientAudio.play();
-
-            setAmbientButton(true);
-
-          }
-
-          catch (error) {
-
-            console.error(
-              "Unable to resume ambient audio:",
-              error
-            );
-
-            setAmbientButton(false);
-
-          }
-
+      ambientToggle.addEventListener("click", async () => {
+        if (!ambientAudio.paused && !userDisabledAmbient) {
+          userDisabledAmbient = true;
+          ambientAudio.pause();
+          synchronizeAudioButton();
+          return;
         }
-      );
-
+        userDisabledAmbient = false;
+        ambientAudio.muted = false;
+        ambientAudio.volume = 0.34;
+        try {
+          await ambientAudio.play();
+        } catch (error) {
+          console.error("Unable to resume ambient audio:", error);
+        }
+        synchronizeAudioButton();
+      });
 
       /* =====================================================
          INTRO FINISHED / ERROR
