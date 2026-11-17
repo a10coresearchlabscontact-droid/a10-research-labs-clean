@@ -1935,12 +1935,17 @@
           introVideo.muted =
             false;
 
-          /* Music starts silently during intro. */
-          ambientAudio.volume =
+          /* Start audible ambient music with the visitor's entry gesture. */
+          ambientAudio.currentTime =
             0;
+
+          ambientAudio.volume =
+            0.18;
 
           const ambientPromise =
             ambientAudio.play();
+
+          setAmbientButton(true);
 
           if (
             ambientPromise &&
