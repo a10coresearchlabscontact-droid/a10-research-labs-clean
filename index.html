@@ -969,7 +969,7 @@
       type="button"
       aria-pressed="false"
     >
-      Ambient · On
+      Audio Off
     </button>
   </div>
 
@@ -1866,8 +1866,8 @@
 
         ambientToggle.textContent =
           isOn
-            ? "Ambient · On"
-            : "Ambient · Off";
+            ? "Audio Off"
+            : "Audio On";
 
         ambientToggle.setAttribute(
           "aria-pressed",
@@ -1919,49 +1919,46 @@
          User gesture starts BOTH intro and ambient audio.
       ====================================================== */
 
-      /* Start the soundtrack first, directly from the user's tap.
-         Muted video is started only after audio playback has settled. */
+      /* iOS: invoke both media play() calls synchronously inside ENTER tap.
+         A second user gesture retries the soundtrack if the browser blocks it. */
+      let soundtrackRequested = false;
+      const startSoundtrack = () => {
+        soundtrackRequested = true;
+        ambientAudio.muted = false;
+        ambientAudio.volume = 0.34;
+        const result = ambientAudio.play();
+        if (result && typeof result.then === "function") {
+          result.then(() => setAmbientButton(true))
+            .catch(error => {
+              console.warn("Soundtrack could not start:", error);
+              setAmbientButton(false);
+            });
+        }
+      };
+
       enterButton.addEventListener("click", () => {
         enterButton.style.display = "none";
         introVideo.style.display = "block";
         introVideo.currentTime = 0;
         introVideo.muted = true;
         introVideo.setAttribute("muted", "");
-
         ambientAudio.currentTime = 0;
-        ambientAudio.muted = false;
-        ambientAudio.volume = 0.34;
-
-        const startVideo = () => {
-          const attempt = introVideo.play();
-          if (attempt && typeof attempt.catch === "function") {
-            attempt.catch(error => console.error("Intro video start failed:", error));
-          }
-        };
-
-        try {
-          const attempt = ambientAudio.play();
-          if (attempt && typeof attempt.then === "function") {
-            attempt.then(() => {
-              setAmbientButton(true);
-              startVideo();
-            }).catch(error => {
-              console.warn("Ambient audio was blocked:", error);
-              setAmbientButton(false);
-              startVideo();
-            });
-          } else {
-            setAmbientButton(!ambientAudio.paused);
-            startVideo();
-          }
-        } catch (error) {
-          console.warn("Ambient audio could not start:", error);
-          setAmbientButton(false);
-          startVideo();
+        startSoundtrack();
+        const videoResult = introVideo.play();
+        if (videoResult && typeof videoResult.catch === "function") {
+          videoResult.catch(error => console.warn("Intro video could not start:", error));
         }
       });
 
-      ambientAudio.addEventListener("play", () => setAmbientButton(true));
+      /* Retry only when audio was requested and the browser declined the
+         initial gesture. Never override a visitor's deliberate mute. */
+      document.addEventListener("pointerdown", () => {
+        if (soundtrackRequested && ambientAudio.paused && !ambientAudio.dataset.userMuted) {
+          startSoundtrack();
+        }
+      }, {capture:true});
+
+      ambientAudio.addEventListener("playing", () => setAmbientButton(true));
       ambientAudio.addEventListener("pause", () => setAmbientButton(false));
       ambientAudio.addEventListener("error", () => setAmbientButton(false));
 
@@ -1975,6 +1972,7 @@
 
           if (!ambientAudio.paused) {
 
+            ambientAudio.dataset.userMuted = "true";
             ambientAudio.pause();
 
             setAmbientButton(false);
@@ -1985,6 +1983,7 @@
 
           try {
 
+            delete ambientAudio.dataset.userMuted;
             ambientAudio.volume =
               0.34;
 
