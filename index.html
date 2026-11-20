@@ -1367,8 +1367,7 @@
             <strong style="color:white;">
               AtencIA™ — Atencio Intelligent Architecture
             </strong>
-            is an intelligent architecture under development within
-            A-10 C.O. Research Labs™.
+            is a personal digital intelligence platform designed to simplify and enrich everyday life, under development within A-10 C.O. Research Labs™.
           </p>
 
           <p>
@@ -1387,7 +1386,7 @@
             orchestration.
           </p>
 
-          <div class="architecture">
+          <p><strong style="color:white">Current development · November 2026</strong><br>The desktop SaaS prototype is in development, with multilingual onboarding, customizable digital agents (ATLC™), a live interaction interface and searchable conversation history. A private beta is planned; these capabilities are not yet generally available.</p><p>Research also explores user-authorized proactive assistance, cross-device continuity, private Home Core environments, SOMA™ as a potential embodiment interface, and LEGATUM™ for consent-based digital legacy. These remain research and development directions.</p><div class="architecture">
             Human
             &nbsp;→&nbsp;
             Intelligent Continuum
@@ -1533,7 +1532,7 @@
               A-10 C.O. Research Labs™.
             </p>
 
-            <p style="margin:24px 0 8px"><a class="btn primary" href="founder-biography.html" style="text-decoration:none">Read Full Biography</a></p>
+            <p style="margin:24px 0 8px"><a class="btn primary" id="bioOpen" href="founder-biography.html" style="text-decoration:none">Read Full Biography</a></p>
 
             <a
               class="orcid"
@@ -2122,5 +2121,36 @@
     })();
   </script>
 
+<dialog id="bioDialog" aria-label="Full institutional biography" style="padding:0;border:1px solid #193348;background:#020711;color:#fff;width:100%;max-width:none;height:100%;max-height:none;position:fixed;inset:0;margin:0;z-index:1150">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 5%;background:#06101c">
+<button id="bioClose" class="sound-btn" type="button">← Back to Research Labs</button>
+<button id="bioAudio" class="sound-btn" type="button" aria-pressed="false">Audio Off</button>
+</div>
+<iframe id="bioFrame" title="Full institutional biography" style="display:block;width:100%;height:calc(100% - 62px);border:0;background:#020711"></iframe>
+</dialog>
+<script>
+(() => {
+ const opener=document.getElementById('bioOpen'), dialog=document.getElementById('bioDialog'), frame=document.getElementById('bioFrame'), close=document.getElementById('bioClose'), audio=document.getElementById('ambientAudio'), toggle=document.getElementById('ambientToggle'), bioAudio=document.getElementById('bioAudio');
+ const sync=()=>{const on=!audio.paused&&!audio.muted;bioAudio.textContent=on?'Audio On':'Audio Off';bioAudio.setAttribute('aria-pressed',String(on));bioAudio.classList.toggle('is-on',on);};
+ bioAudio.addEventListener('click',()=>{toggle.click();sync();});
+ ['playing','pause','volumechange','error'].forEach(e=>audio.addEventListener(e,sync));
+ opener.addEventListener('click',e=>{
+  if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||typeof dialog.showModal!=='function')return;
+  e.preventDefault();
+  if(!frame.getAttribute('src'))frame.src=opener.href;
+  dialog.showModal();sync();close.focus();
+ });
+ close.addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('close',()=>opener.focus({preventScroll:true}));
+ frame.addEventListener('load',()=>{
+  try{
+   const doc=frame.contentDocument;
+   const back=doc.querySelector('header a');
+   if(back)back.addEventListener('click',e=>{if(!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){e.preventDefault();dialog.close();}});
+   doc.addEventListener('keydown',e=>{if(e.key==='Escape')dialog.close();});
+  }catch(e){console.warn('Biography navigation unavailable',e);}
+ });
+})();
+</script>
 </body>
 </html>
