@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- A-10 C.O. Research Labs™ — CLEAN INTEGRATED BUILD — September 2026 -->
+<!-- A-10 C.O. Research Labs™ — Version 4.0 — Responsive Edition -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,9 @@
     content="A-10 C.O. Research Labs™ is the science and technology division of A-10 C.O. Enterprises LLC, developing AtencIA™, intelligent architectures, human-technology symbiosis, contextual systems, interoperability and digital continuity."
   >
 
-  <meta name="author" content="Dr. William J. Atencio González">
+  <link rel="canonical" href="https://a10coresearchlabs.com/">
+<meta name="theme-color" content="#020711">
+<meta name="author" content="Dr. William J. Atencio González">
 
   <style>
     :root {
@@ -917,6 +919,67 @@
 
   
 .research-library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.research-library-item{border:1px solid var(--line);background:var(--panel);padding:26px;border-radius:16px}.research-library-item h3{font-size:20px;line-height:1.35;margin:12px 0}.research-library-item p{color:var(--muted);line-height:1.7}.research-library-item span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);font-weight:700}@media(max-width:700px){.research-library-grid{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
+/* V4.0 — mobile stability and editorial refresh */
+html {max-width:100%;overflow-x:hidden;scroll-padding-top:100px}
+body {width:100%;max-width:100%;overflow-wrap:anywhere}
+@supports(overflow:clip){html{overflow-x:clip}}
+main,section,header,footer{min-width:0;max-width:100%}
+.wrap{width:min(calc(100% - 48px),1280px);min-width:0}
+.hero{overflow:hidden;isolation:isolate}
+.hero::after{right:0;width:min(520px,100%);z-index:-1}
+.hero-grid,.about-grid,.atencia-grid,.founder-grid,.contact-box,.novaverse-copy{gap:clamp(24px,5vw,64px)}
+.hero-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+.hero-grid>*,.about-grid>*,.atencia-grid>*,.founder-grid>*,.contact-box>*,.novaverse-copy>*,.cards>*,.focus-grid>*,.research-library-grid>*{min-width:0}
+h1{font-size:clamp(36px,5.5vw,82px);line-height:1.04;text-wrap:balance}
+h2{font-size:clamp(30px,4.5vw,56px);text-wrap:balance}
+section{padding:clamp(64px,8vw,112px) 0}
+.hero-copy,.intro{line-height:1.75}
+.cards{grid-template-columns:repeat(4,minmax(0,1fr))}
+.focus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card,.focus-card,.about-card,.contact-card,.research-library-item{border-radius:24px;padding:clamp(20px,3vw,32px);background:linear-gradient(145deg,rgba(13,30,49,.94),rgba(5,13,24,.96))}
+.hero-panel{overflow:hidden;min-width:0}
+.hero-logo-image{max-width:100%;height:auto}
+.btn{max-width:100%;white-space:normal;text-align:center}
+.orcid{max-width:100%;flex-wrap:wrap}
+input,textarea{font-size:16px;min-width:0}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+.sound-dock{right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom))}
+.sound-btn{min-height:44px}
+.intro-screen{width:100%;height:100%;height:100dvh;padding:24px}
+.intro-video{width:min(100%,1100px);height:auto;max-height:80dvh}
+.enter-button{max-width:100%}
+.skip-intro{position:absolute;bottom:max(24px,env(safe-area-inset-bottom));background:#06101c;color:#fff;border:1px solid #49657b;border-radius:999px;padding:12px 20px;cursor:pointer}
+.menu-toggle{display:none}
+nav a{padding:10px 0}
+#bioDialog>div{gap:8px;flex-wrap:wrap}
+@media(max-width:950px){
+.hero-grid,.about-grid,.atencia-grid,.founder-grid,.contact-box,.novaverse-copy{grid-template-columns:minmax(0,1fr)}
+.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.nav{flex-wrap:wrap;gap:12px}
+}
+@media(max-width:700px){
+.wrap{width:calc(100% - 36px)}
+.nav{flex-direction:row;align-items:center;min-height:70px;padding:12px 0;gap:8px}
+.brand{flex:1;min-width:0}
+.brand strong{font-size:12px;letter-spacing:.06em}
+.brand span{font-size:9px;letter-spacing:.08em}
+.menu-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid var(--line-strong);border-radius:12px;background:var(--panel);color:var(--white);cursor:pointer}
+nav{display:none;width:100%;flex-basis:100%;max-height:65dvh;overflow-y:auto;gap:4px}
+nav.is-open{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+nav a{padding:14px 10px;border-radius:10px;background:var(--panel)}
+.hero{padding:48px 0 60px}
+.hero-actions .btn{flex:1 1 140px;padding:10px 14px}
+.hero-copy,.intro{font-size:16px}
+.cards,.focus-grid,.research-library-grid{grid-template-columns:minmax(0,1fr)}
+.card{min-height:0}
+.founder-photo{max-width:320px}
+.atencia-logo-wrap{padding:20px}
+.image-lightbox{padding:12px}
+.image-lightbox-inner{width:100%}
+footer{padding-bottom:90px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 
@@ -936,11 +999,12 @@
       ENTER A-10 C.O. RESEARCH LABS
     </button>
 
+    <button class="skip-intro" id="skipIntro" type="button">Skip introduction</button>
     <video
       id="introVideo"
       class="intro-video"
       playsinline
-      preload="auto"
+      preload="metadata"
     >
       <source
         src="a10-research-labs-intro.mp4"
@@ -985,7 +1049,8 @@
         <span>Science & Technology Division</span>
       </a>
 
-      <nav>
+      <button class="menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false">Menu</button>
+<nav id="siteNav" aria-label="Main navigation">
         <a href="#about">About</a>
         <a href="#pillars">Pillars</a>
         <a href="#focus">Focus Areas</a>
@@ -1929,6 +1994,7 @@
         synchronizeAudioButton();
       };
 
+      document.getElementById("skipIntro").addEventListener("click", () => { userDisabledAmbient=true; introVideo.pause(); ambientAudio.pause(); finishIntro(); synchronizeAudioButton(); });
       enterButton.addEventListener("click", () => {
         enterButton.style.display = "none";
         introVideo.style.display = "block";
@@ -2152,5 +2218,7 @@
  });
 })();
 </script>
-</body>
+<script>
+(()=>{const b=document.querySelector(".menu-toggle"),n=document.getElementById("siteNav");function close(){n.classList.remove("is-open");b.setAttribute("aria-expanded","false")}b.addEventListener("click",()=>b.setAttribute("aria-expanded",String(n.classList.toggle("is-open"))));n.addEventListener("click",e=>{if(e.target.closest("a"))close()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&n.classList.contains("is-open")){close();b.focus()}})})();
+</script></body>
 </html>
