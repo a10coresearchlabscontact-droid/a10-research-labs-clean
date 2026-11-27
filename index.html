@@ -2414,5 +2414,17 @@ header{position:relative}
 #atencia .architecture{margin:clamp(12px,2vh,22px) 0 14px;padding:12px;line-height:1.5}#atenciaExplore{margin-top:2px}
 @media(max-width:950px){#atencia{display:block;background-size:100% 100%,100% auto;background-position:center,top left;padding:0 0 80px}#atencia .atencia-grid{width:calc(100% - 36px);grid-template-columns:1fr;gap:16px}#atencia .atencia-visual{height:45vw}#atencia .atencia-copy{padding:0;background:#041637e8}#atencia .atencia-copy p{font-size:15px}}
 </style>
+<style id="atencia-final-composition">
+@media(min-width:951px){
+#atencia{background-size:100% 100%,100% auto;background-position:center,left center;min-height:100dvh;padding:clamp(24px,4vh,48px) 0 clamp(76px,10vh,104px);background-image:linear-gradient(to bottom,#041637 0%,transparent 8%,transparent 88%,#041637 100%),url('atencia-wallpaper.png')}
+#atencia .atencia-grid{width:min(calc(100% - 96px),1560px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,3vw,52px)}
+#atencia .atencia-copy{padding-right:clamp(16px,3vw,48px);min-width:0}
+#atencia .section-kicker{margin-bottom:clamp(8px,1.5vh,16px)}
+#atencia h2{margin-bottom:clamp(14px,2.4vh,26px)}
+#atencia .atencia-copy p{font-size:clamp(13px,1.8vh,16px);line-height:1.5;margin-bottom:clamp(10px,1.7vh,18px)}
+#atencia .architecture{margin-top:clamp(14px,2vh,24px);margin-bottom:18px}
+}
+@media(max-width:950px){#atencia .atencia-visual{height:49vw}#atencia{background-image:linear-gradient(to bottom,#041637 0%,transparent 5%,transparent 85%,#041637 100%),url('atencia-wallpaper.png')}}
+</style>
 </body>
 </html>
