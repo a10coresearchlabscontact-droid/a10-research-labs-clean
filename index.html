@@ -987,6 +987,7 @@ button, a[href] { transition: filter .18s ease, box-shadow .18s ease; }
 button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filter: brightness(1.18); }
 .novaverse-banner button:hover span, .novaverse-banner a:hover, .novaverse-banner button:focus-visible span { box-shadow: 0 0 14px #80caff; }
 </style>
+<style>#atenciaExplore:hover,#atenciaExplore:focus-visible{box-shadow:0 0 14px #80caff}</style>
 </head>
 
 <body>
@@ -1416,12 +1417,14 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 
       <div class="wrap atencia-grid">
 
-        <div class="atencia-logo-wrap">
+        <div class="atencia-logo-wrap" style="position:relative">
 
           <img
             src="atencia-logo.PNG"
             alt="AtencIA — Atencio Intelligent Architecture"
           >
+          <button type="button" id="atenciaExplore" aria-label="Click to Explore AtencIA — private development, not yet available" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:3;box-sizing:border-box;width:142px;height:30px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:0 8px;font:600 12px/1 Arial,sans-serif;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;letter-spacing:.06em;cursor:pointer;margin:0">Click to Explore ↗</button>
+
 
         </div>
 
