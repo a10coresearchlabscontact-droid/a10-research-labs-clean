@@ -1123,13 +1123,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
           </div>
         </div>
 
-        <div class="hero-panel logo-panel">
-          <img
-            class="hero-logo-image"
-            src="a10-logo.jpg"
-            alt="A-10 C.O. Research Labs"
-          >
-        </div>
+
 
       </div>
     </section>
@@ -2380,5 +2374,13 @@ header{position:relative}
 <script>
 (()=>{const h=document.querySelector('header');const sync=()=>document.documentElement.style.setProperty('--home-header-height',h.getBoundingClientRect().height+'px');sync();new ResizeObserver(sync).observe(h);document.querySelector('header a[href="#home"]').addEventListener('click',e=>{if(!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'','#home');window.scrollTo({top:0,behavior:'instant'});});})();
 </script>
+
+<style id="hero-wallpaper">
+#home{background-color:#041637;background-image:url('a10-hero-wallpaper.png');background-size:cover;background-position:center right;background-repeat:no-repeat}
+#home::after{display:none}
+#home .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:100%}
+#home .hero-grid>div:first-child{position:relative;z-index:1}
+@media(max-width:950px){#home{background-size:100% auto;background-position:center bottom;padding-bottom:clamp(180px,55vw,480px)}#home .hero-grid{grid-template-columns:minmax(0,1fr)} }
+</style>
 </body>
 </html>
