@@ -2378,9 +2378,10 @@ header{position:relative}
 <style id="hero-wallpaper">
 #home{background-color:#041637;background-image:url('a10-hero-wallpaper.png');background-size:cover;background-position:center right;background-repeat:no-repeat}
 #home::after{display:none}
-#home .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:100%}
+#home .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);width:min(calc(100% - 48px),1280px);margin-inline:auto}
+@media(min-width:951px){#home .hero-grid>div:first-child{max-width:100%;padding-right:clamp(8px,1vw,20px)}#home h1{font-size:clamp(34px,min(4.5vw,8vh),72px);line-height:1.06}#home .hero-actions{flex-wrap:nowrap}}
 #home .hero-grid>div:first-child{position:relative;z-index:1}
-@media(max-width:950px){#home{background-size:100% auto;background-position:center bottom;padding-bottom:clamp(180px,55vw,480px)}#home .hero-grid{grid-template-columns:minmax(0,1fr)} }
+@media(max-width:950px){#home .hero-grid{width:calc(100% - 36px)}#home{background-size:100% auto;background-position:center bottom;padding-bottom:clamp(180px,55vw,480px)}#home .hero-grid{grid-template-columns:minmax(0,1fr)} }
 </style>
 </body>
 </html>
