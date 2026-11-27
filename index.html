@@ -2331,7 +2331,7 @@ html{scroll-padding-top:0}
 }
 </style>
 <script>
-(()=>{function frame(id,behavior){const section=document.getElementById(id);if(!section||!matchMedia('(min-width:951px)').matches)return;const header=document.querySelector('header');const fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);const top=fixed?header.getBoundingClientRect().height:0;const available=innerHeight-top;const extra=Math.max(0,(available-section.getBoundingClientRect().height)/2);window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-top-extra),behavior});}document.addEventListener('click',e=>{const a=e.target.closest('.hero-actions a[href], header a[href="#about"], header a[href="#pillars"]');if(!a||!['#atencia','#focus','#contact','#about','#pillars'].includes(a.hash)||!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'',a.hash);frame(a.hash.slice(1),matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth');});})();
+(()=>{function frame(id,behavior){const section=document.getElementById(id);if(!section||!matchMedia('(min-width:951px)').matches)return;const header=document.querySelector('header');const fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);const top=fixed?header.getBoundingClientRect().height:0;const available=innerHeight-top;const extra=Math.max(0,(available-section.getBoundingClientRect().height)/2);window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-top-extra),behavior});}document.addEventListener('click',e=>{const a=e.target.closest('.hero-actions a[href], header a[href="#about"], header a[href="#pillars"], header a[href="#focus"]');if(!a||!['#atencia','#focus','#contact','#about','#pillars'].includes(a.hash)||!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'',a.hash);frame(a.hash.slice(1),matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth');});})();
 </script>
 <style id="home-framing">
 @media(min-width:951px){
@@ -2362,6 +2362,18 @@ header{position:relative}
 #pillars .card{min-height:0;padding:clamp(14px,3vh,25px)}
 #pillars .card h3{margin:clamp(8px,2vh,15px) 0 10px}
 #pillars .card p{line-height:1.45}
+}
+</style>
+<style id="focus-framing">
+@media(min-width:951px){
+#focus{box-sizing:border-box;min-height:100dvh;display:flex;align-items:center;padding:clamp(12px,2.5vh,30px) 0;scroll-margin:0}
+#focus .section-kicker{font-size:clamp(10px,1.6vh,12px);margin-bottom:8px}
+#focus h2{font-size:clamp(24px,min(3.2vw,5.8vh),44px);line-height:1.1;margin:8px 0 12px}
+#focus .intro{font-size:clamp(12px,2vh,15px);line-height:1.4;margin-bottom:0}
+#focus .focus-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(7px,1.5vh,14px);margin-top:clamp(12px,3vh,28px)}
+#focus .focus-card{min-height:0;padding:clamp(10px,2vh,20px)}
+#focus .focus-card h3{font-size:clamp(13px,2.2vh,17px);line-height:1.2;margin:0 0 6px}
+#focus .focus-card p{font-size:clamp(12px,1.9vh,14px);line-height:1.35;margin:0}
 }
 </style>
 </body>
