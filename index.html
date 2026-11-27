@@ -1479,7 +1479,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
       <div class="wrap">
 
         <div class="section-kicker">
-          Narrative Research Ecosystem
+          Sandbox Narrative Research Ecosystem
         </div>
 
         <h2>
@@ -1487,7 +1487,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
         </h2>
 
         <p class="intro">
-          NovaVerse™ is a science-fiction universe connected to the
+          NovaVerse™ is a sandbox science-fiction universe connected to the
           broader creative ecosystem of A-10 C.O. Enterprises LLC.
           Within the Research Labs context, selected concepts from
           the universe can function as speculative environments for
@@ -2505,6 +2505,17 @@ header .brand .brand-division{font-size:10px!important;line-height:1.2;letter-sp
 #pillars::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('research-generic-wallpaper.png') center / cover no-repeat;mask-image:linear-gradient(to bottom,transparent,black 14%,black 70%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent,black 14%,black 70%,transparent 100%)}
 #focus{border-top:0}
 @media(min-width:951px){#home{background-position:center,center,right top}}
+</style>
+<style id="novaverse-viewport-framing">
+@media(min-width:951px){
+#novaverse{box-sizing:border-box;min-height:100dvh;display:flex;align-items:center;padding:18px 0 38px;scroll-margin:0}
+#novaverse .section-kicker{font-size:12px;margin:0 0 5px}
+#novaverse h2{font-size:clamp(26px,5vh,44px);line-height:1.05;margin:0 0 7px}
+#novaverse .intro{max-width:100%;font-size:clamp(12px,1.8vh,15px);line-height:1.35;margin:0}
+#novaverse .novaverse-banner{width:min(90%,calc(max(150px,100dvh - 250px) * 2312 / 1320))!important;margin:12px auto 0;border-radius:16px}
+#novaverse .novaverse-copy{margin-top:10px;gap:20px}
+#novaverse .novaverse-copy p{font-size:clamp(11px,1.6vh,14px);line-height:1.3;margin:0}
+}
 </style>
 </body>
 </html>
