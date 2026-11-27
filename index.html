@@ -1510,7 +1510,7 @@ footer{padding-bottom:90px}
               src="novaverse-saga-banner.PNG"
               alt="NovaVerse Saga — Science Fiction Universe"
             >
-            <span style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:9px 20px;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font-weight:600;letter-spacing:.06em">Click to Explore ↗</span>
+            <span style="position:absolute;bottom:16px;right:16px;z-index:2;white-space:nowrap;padding:9px 20px;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font-weight:600;letter-spacing:.06em">Click to Explore ↗</span>
 
           </button>
 
@@ -2104,15 +2104,10 @@ footer{padding-bottom:90px}
           document.activeElement;
         audioTransition++;
         resumeLabs = !ambientAudio.paused && !userDisabledAmbient;
-        if (resumeLabs) {
-          novaAudio.currentTime = 0;
-          novaAudio.volume = 0;
-          novaAudio.play().then(() => {
-            if (!lightbox.classList.contains("is-open")) { novaAudio.pause(); return; }
-            fadeAudio(ambientAudio, 0, () => ambientAudio.pause());
-            fadeAudio(novaAudio, 0.34);
-          }).catch(error => console.warn("NovaVerse audio unavailable", error));
-        }
+        ambientAudio.pause();
+        novaAudio.currentTime = 0;
+        novaAudio.volume = 0.34;
+        novaAudio.play().catch(error => console.warn("NovaVerse audio unavailable", error));
 
         lightbox.classList.add(
           "is-open"
@@ -2130,11 +2125,11 @@ footer{padding-bottom:90px}
 
         if (!lightbox || !lightbox.classList.contains("is-open")) return;
         audioTransition++;
-        fadeAudio(novaAudio, 0, () => novaAudio.pause());
+        novaAudio.pause();
+        novaAudio.currentTime = 0;
+        ambientAudio.volume = 0.34;
         if (resumeLabs && !userDisabledAmbient) {
-          if (ambientAudio.paused) ambientAudio.volume = 0;
-          ambientAudio.play().then(() => fadeAudio(ambientAudio, 0.34))
-            .catch(error => console.warn("Ambient resume unavailable", error));
+          ambientAudio.play().catch(error => console.warn("Ambient resume unavailable", error));
         }
         resumeLabs = false;
 
