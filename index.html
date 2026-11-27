@@ -2279,13 +2279,26 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
  document.addEventListener('click', e => { if (e.target.closest(selector)) play(click); }, true);
 })();
 </script>
-<dialog id="editionDialog" style="background:#071528;color:white;border:1px solid #80caff;border-radius:18px;padding:24px;max-width:90vw">
-<form method="dialog"><button aria-label="Close" style="float:right;color:white;background:transparent;border:0;font-size:22px">×</button></form>
-<h2>Choose your edition</h2><p>NovaVerse Saga — Book I</p>
-<a style="display:block;padding:14px;color:#a8dfff" href="https://www.amazon.com/dp/B0H53S9Y31" target="_blank" rel="noopener noreferrer">English Edition — Buy on Amazon ↗</a>
-<a style="display:block;padding:14px;color:#a8dfff" href="https://www.amazon.com/dp/B0H66NT2KY" target="_blank" rel="noopener noreferrer">Spanish Edition — Buy on Amazon ↗</a>
+<dialog id="editionDialog" aria-labelledby="editionTitle">
+<form method="dialog"><button class="edition-close" aria-label="Close">×</button></form>
+<div class="edition-brand">NOVAVERSE™</div>
+<h2 id="editionTitle">Choose your edition</h2>
+<p>Book I · The N.O.V.A. Project</p>
+<a class="edition-choice" href="https://www.amazon.com/dp/B0H53S9Y31" target="_blank" rel="noopener noreferrer"><span>English Edition<small>Buy on Amazon</small></span><span aria-hidden="true">↗</span></a>
+<a class="edition-choice" href="https://www.amazon.com/dp/B0H66NT2KY" target="_blank" rel="noopener noreferrer"><span>Spanish Edition<small>Buy on Amazon</small></span><span aria-hidden="true">↗</span></a>
 </dialog>
-<style>#editionDialog::backdrop{background:#000a}#buyEdition:hover{box-shadow:0 0 14px #80caff}</style>
+<style>
+#editionDialog {position:fixed;inset:0;margin:auto;box-sizing:border-box;width:340px;max-width:calc(100vw - 40px);max-height:calc(100dvh - 40px);overflow:auto;padding:26px;background:linear-gradient(145deg,rgba(15,39,68,.98),rgba(5,15,31,.97));color:#eef7ff;border:1px solid #477ca4;border-radius:18px;box-shadow:0 16px 60px #0008,0 0 24px #238cff22;}
+#editionDialog::backdrop {background:rgba(2,8,20,.58);backdrop-filter:blur(4px);}
+#editionDialog .edition-brand {font-size:11px;letter-spacing:.22em;color:#80caff;margin-bottom:12px;font-weight:700;}
+#editionDialog h2 {font-size:22px;line-height:1.25;letter-spacing:-.025em;margin:0 0 6px;font-weight:600;}
+#editionDialog p {font-size:12px;line-height:1.5;color:#a6bad0;margin:0 0 20px;}
+#editionDialog .edition-close {position:absolute;right:12px;top:12px;width:28px;height:28px;border:1px solid #477ca4;border-radius:50%;background:transparent;color:#dceeff;font-size:19px;line-height:1;cursor:pointer;}
+#editionDialog .edition-choice {display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #477ca4;border-radius:10px;padding:11px 14px;margin-top:10px;color:#eef7ff;font-size:13px;font-weight:600;text-decoration:none;background:#102c46;transition:background .2s,box-shadow .2s,border-color .2s;}
+#editionDialog .edition-choice small {display:block;color:#a6c5dd;font-size:11px;font-weight:400;margin-top:3px;}
+#editionDialog .edition-choice:hover,#editionDialog .edition-choice:focus-visible,#editionDialog .edition-close:hover {border-color:#80caff;box-shadow:0 0 14px #23aaff55;background:#173f62;}
+</style>
+<style>#buyEdition:hover{box-shadow:0 0 14px #80caff}</style>
 <script>document.getElementById('buyEdition').addEventListener('click',()=>document.getElementById('editionDialog').showModal());</script>
 </body>
 </html>
