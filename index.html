@@ -1822,10 +1822,14 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
           ×
         </button>
 
+        <div class="nova-expanded-art">
         <img
           src="novaverse-saga-banner.PNG"
           alt="NovaVerse Saga — Science Fiction Universe"
         >
+        <a class="nova-expanded-action nova-expanded-explore" href="https://novaversesaga.com/" target="_blank" rel="noopener noreferrer">Click to Explore ↗</a>
+        <button class="nova-expanded-action nova-expanded-buy" id="buyEditionExpanded" type="button" aria-haspopup="dialog">Buy on Amazon ↗</button>
+        </div>
 
       </div>
 
@@ -2179,6 +2183,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 
           if (
             event.key === "Escape" &&
+            !document.getElementById("editionDialog")?.open &&
             lightbox &&
             lightbox.classList.contains(
               "is-open"
@@ -2264,7 +2269,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 #editionDialog .edition-choice:hover,#editionDialog .edition-choice:focus-visible,#editionDialog .edition-close:hover {border-color:#80caff;box-shadow:0 0 14px #23aaff55;background:#173f62;}
 </style>
 <style>#buyEdition:hover{box-shadow:0 0 14px #80caff}</style>
-<script>document.getElementById('buyEdition').addEventListener('click',()=>document.getElementById('editionDialog').showModal());</script>
+<script>['buyEdition','buyEditionExpanded'].forEach(id=>document.getElementById(id).addEventListener('click',()=>document.getElementById('editionDialog').showModal()));</script>
 <style id="section-fit">
 @media(min-width:951px){
 html{scroll-padding-top:0}
@@ -2491,6 +2496,16 @@ header .brand .brand-division{font-size:10px!important;line-height:1.2;letter-sp
 #novaverse .novaverse-copy{margin-top:10px;gap:20px}
 #novaverse .novaverse-copy p{font-size:clamp(11px,1.6vh,14px);line-height:1.3;margin:0}
 }
+</style>
+<style id="nova-expanded-actions">
+#novaverseLightbox .nova-expanded-art{position:relative;display:flex;max-width:100%;width:max-content}
+#novaverseLightbox .nova-expanded-art img{display:block;width:auto;height:auto;max-width:100%;max-height:88vh}
+#novaverseLightbox .nova-expanded-action{position:absolute;bottom:16px;z-index:3;display:inline-flex;align-items:center;justify-content:center;padding:0 10px;height:30px;box-sizing:border-box;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font:600 12px/1 Arial,sans-serif;letter-spacing:.06em;white-space:nowrap;text-decoration:none;cursor:pointer}
+#novaverseLightbox .nova-expanded-explore{left:16px}
+#novaverseLightbox .nova-expanded-buy{right:16px}
+#novaverseLightbox .nova-expanded-action:hover{box-shadow:0 0 14px #80caff}
+#novaverseLightbox .lightbox-close{z-index:4}
+@media(max-width:500px){#novaverseLightbox .nova-expanded-action{bottom:6px;font-size:10px;height:26px;padding:0 6px}#novaverseLightbox .nova-expanded-explore{left:6px}#novaverseLightbox .nova-expanded-buy{right:6px}}
 </style>
 </body>
 </html>
