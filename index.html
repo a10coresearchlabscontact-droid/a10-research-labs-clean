@@ -988,6 +988,10 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 .novaverse-banner button:hover span, .novaverse-banner a:hover, .novaverse-banner button:focus-visible span { box-shadow: 0 0 14px #80caff; }
 </style>
 <style>#atenciaExplore:hover,#atenciaExplore:focus-visible{box-shadow:0 0 14px #80caff}</style>
+<style>
+.hero-actions .btn.primary { box-sizing:border-box; min-width:160px; min-height:48px; transition:transform .25s ease, filter .25s ease, box-shadow .25s ease; }
+.hero-actions .btn.primary:hover,.hero-actions .btn.primary:focus-visible { filter:brightness(1.3); box-shadow:0 0 24px #23d8ff99,0 0 8px #23d8ff; transform:translateY(-2px); }
+</style>
 </head>
 
 <body>
@@ -1109,11 +1113,11 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
               Explore AtencIA
             </a>
 
-            <a class="btn" href="#focus">
+            <a class="btn primary" href="#focus">
               Research Areas
             </a>
 
-            <a class="btn" href="#contact">
+            <a class="btn primary" href="#contact">
               Collaborate
             </a>
           </div>
