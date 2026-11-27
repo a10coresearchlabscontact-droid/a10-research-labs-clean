@@ -2438,5 +2438,12 @@ header{position:relative}
 #atencia .architecture{overflow-wrap:anywhere}
 }
 </style>
+<style id="atencia-seamless-final">
+#atencia{background-color:transparent;background-image:none;position:relative;isolation:isolate;border:0}
+#atencia::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('atencia-wallpaper.png') left center / 90% auto no-repeat;mask-image:linear-gradient(to bottom,transparent,black 13%,black 84%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,black 13%,black 84%,transparent)}
+#novaverse{border-top:0}
+@media(min-width:951px){#atencia .atencia-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:clamp(32px,4vw,64px)}#atencia .atencia-copy{padding-right:clamp(8px,1.5vw,24px)} }
+@media(max-width:950px){#atencia::before{background-position:left top;background-size:100% auto;mask-image:linear-gradient(to bottom,transparent,black 3%,black 32%,transparent 48%);-webkit-mask-image:linear-gradient(to bottom,transparent,black 3%,black 32%,transparent 48%)}}
+</style>
 </body>
 </html>
