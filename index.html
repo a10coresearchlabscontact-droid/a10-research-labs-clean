@@ -2300,5 +2300,32 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 </style>
 <style>#buyEdition:hover{box-shadow:0 0 14px #80caff}</style>
 <script>document.getElementById('buyEdition').addEventListener('click',()=>document.getElementById('editionDialog').showModal());</script>
+<style id="section-fit">
+@media(min-width:951px){
+html{scroll-padding-top:0}
+#atencia,#focus,#contact{padding:24px 0;scroll-margin-top:0}
+#atencia h2,#focus h2,#contact h2{font-size:clamp(26px,3vw,42px);margin:8px 0 12px}
+#atencia .atencia-copy p{margin-bottom:9px;line-height:1.45;font-size:14px}
+#atencia .atencia-grid{gap:32px}
+#atencia .atencia-logo-wrap{padding:14px}
+#atencia .atencia-logo-wrap img{max-height:52dvh;object-fit:contain}
+#atencia .architecture{margin-top:12px;padding:12px;font-size:12px}
+#focus .intro,#contact .intro{font-size:14px;line-height:1.45}
+#focus .focus-grid,#contact .contact-box{margin-top:16px;gap:12px}
+#focus .focus-card,#contact .contact-card{padding:15px}
+#focus .focus-card h3{margin-bottom:4px;font-size:16px}
+#focus .focus-card p{font-size:13px;line-height:1.4}
+#contact .contact-card input,#contact .contact-card textarea{padding:7px 10px;margin-bottom:8px}
+#contact .contact-card textarea{height:76px}
+#contact .contact-card label{margin-bottom:3px}
+#contact .official-info{margin-top:9px;line-height:1.4;font-size:13px}
+#contact .info-block{margin-top:8px}
+#contact .contact-card > p{margin:6px 0 10px!important;font-size:13px}
+#contact .contact-card > strong{font-size:16px}
+}
+</style>
+<script>
+(()=>{function frame(id,behavior){const section=document.getElementById(id);if(!section||!matchMedia('(min-width:951px)').matches)return;const header=document.querySelector('header');const fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);const top=fixed?header.getBoundingClientRect().height:0;const available=innerHeight-top;const extra=Math.max(0,(available-section.getBoundingClientRect().height)/2);window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-top-extra),behavior});}document.addEventListener('click',e=>{const a=e.target.closest('.hero-actions a[href]');if(!a||!['#atencia','#focus','#contact'].includes(a.hash)||!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'',a.hash);frame(a.hash.slice(1),matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth');});})();
+</script>
 </body>
 </html>
