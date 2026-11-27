@@ -2501,7 +2501,10 @@ header .brand .brand-division{font-size:10px!important;line-height:1.2;letter-sp
 }
 </style>
 <style id="pillars-wallpaper-only">
-#pillars{background-image:linear-gradient(to bottom,rgba(5,17,37,.75),transparent 15%,transparent 85%,rgba(5,17,37,.75)),url('research-generic-wallpaper.png');background-size:cover;background-position:center;background-repeat:no-repeat;}
+#pillars{position:relative;isolation:isolate;background:transparent;border-bottom:0}
+#pillars::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('research-generic-wallpaper.png') center / cover no-repeat;mask-image:linear-gradient(to bottom,transparent,black 14%,black 70%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent,black 14%,black 70%,transparent 100%)}
+#focus{border-top:0}
+@media(min-width:951px){#home{background-position:center,center,right top}}
 </style>
 </body>
 </html>
