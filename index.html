@@ -1415,16 +1415,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 
       <div class="wrap atencia-grid">
 
-        <div class="atencia-visual"><div class="atencia-logo-wrap">
-
-          <img
-            src="atencia-logo.PNG"
-            alt="AtencIA — Atencio Intelligent Architecture"
-          >
-          </div>
-<button class="btn primary" <button type="button" id="atenciaExplore" aria-label="Click to Explore AtencIA — private development, not yet available">Click to Explore ↗</button>
-</div>
-
+        <div class="atencia-visual" aria-hidden="true"></div>
         <div class="atencia-copy">
 
           <div class="section-kicker">
@@ -1473,6 +1464,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
             &nbsp;→&nbsp;
             Action
           </div>
+          <button class="btn primary" type="button" id="atenciaExplore" aria-label="Explore AtencIA private development">Click to Explore ↗</button>
 
         </div>
 
@@ -2412,6 +2404,15 @@ header{position:relative}
 #atenciaExplore{position:static;min-height:38px;padding:0 24px;cursor:pointer}
 #atenciaExplore:hover,#atenciaExplore:focus-visible{filter:brightness(1.25);box-shadow:0 0 24px #23d8ff99;transform:translateY(-2px)}
 @media(max-width:950px){#atencia .atencia-logo-wrap{width:min(100%,480px)}}
+</style>
+<style id="atencia-wallpaper-layout">
+#atencia{box-sizing:border-box;border:0;background-color:#041637;background-image:linear-gradient(to bottom,#041637 0%,transparent 10%,transparent 85%,#041637 100%),url('atencia-wallpaper.png');background-repeat:no-repeat;background-position:center,left center;background-size:100% 100%,cover;min-height:100dvh;display:flex;align-items:center;padding:clamp(24px,4vh,48px) 0 80px;scroll-margin-top:0}
+#atencia .atencia-grid{width:min(calc(100% - 80px),1440px);grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(24px,4vw,64px);align-items:center}
+#atencia .atencia-copy{padding-right:clamp(12px,3vw,48px)}
+#atencia .section-kicker{margin-bottom:10px}#atencia h2{margin:0 0 clamp(12px,2vh,22px);font-size:clamp(32px,3.5vw,52px)}
+#atencia .atencia-copy p{font-size:clamp(13px,1.8vh,16px);line-height:1.5;margin:0 0 clamp(9px,1.4vh,16px)}
+#atencia .architecture{margin:clamp(12px,2vh,22px) 0 14px;padding:12px;line-height:1.5}#atenciaExplore{margin-top:2px}
+@media(max-width:950px){#atencia{display:block;background-size:100% 100%,100% auto;background-position:center,top left;padding:0 0 80px}#atencia .atencia-grid{width:calc(100% - 36px);grid-template-columns:1fr;gap:16px}#atencia .atencia-visual{height:45vw}#atencia .atencia-copy{padding:0;background:#041637e8}#atencia .atencia-copy p{font-size:15px}}
 </style>
 </body>
 </html>
