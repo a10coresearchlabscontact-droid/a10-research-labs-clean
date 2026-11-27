@@ -2508,8 +2508,8 @@ header .brand .brand-division{font-size:10px!important;line-height:1.2;letter-sp
 @media(max-width:500px){#novaverseLightbox .nova-expanded-action{bottom:6px;font-size:10px;height:26px;padding:0 6px}#novaverseLightbox .nova-expanded-explore{left:6px}#novaverseLightbox .nova-expanded-buy{right:6px}}
 </style>
 <style id="post-novaverse-viewport-framing">
-#publications{background:#020711;background-image:none}
-#publications::before,#publications::after{background-image:none}
+#publications{position:relative;isolation:isolate;background:transparent;border-bottom:0}
+#publications::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('research-generic-wallpaper.png') center / cover no-repeat;mask-image:linear-gradient(to bottom,transparent,black 14%,black 70%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent,black 14%,black 70%,transparent 100%)}
 #publications .research-library-item{background:transparent}
 @media(min-width:951px){
 #publications,#founder,#contact{box-sizing:border-box;min-height:100dvh;display:flex;align-items:center;padding:18px 0 48px;scroll-margin:0}
