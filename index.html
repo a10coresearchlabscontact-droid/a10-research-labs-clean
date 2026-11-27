@@ -2507,5 +2507,33 @@ header .brand .brand-division{font-size:10px!important;line-height:1.2;letter-sp
 #novaverseLightbox .lightbox-close{z-index:4}
 @media(max-width:500px){#novaverseLightbox .nova-expanded-action{bottom:6px;font-size:10px;height:26px;padding:0 6px}#novaverseLightbox .nova-expanded-explore{left:6px}#novaverseLightbox .nova-expanded-buy{right:6px}}
 </style>
+<style id="post-novaverse-viewport-framing">
+#publications{background:#020711;background-image:none}
+#publications::before,#publications::after{background-image:none}
+#publications .research-library-item{background:transparent}
+@media(min-width:951px){
+#publications,#founder,#contact{box-sizing:border-box;min-height:100dvh;display:flex;align-items:center;padding:18px 0 48px;scroll-margin:0}
+#publications .section-kicker,#founder .section-kicker,#contact .section-kicker{font-size:11px;margin:0 0 6px}
+#publications h2,#founder h2,#contact h2{font-size:clamp(25px,4.5vh,40px);line-height:1.1;margin:0 0 8px}
+#publications .wrap>p{font-size:clamp(12px,1.9vh,15px);line-height:1.35;margin:10px 0!important;max-width:100%!important}
+#publications .research-library-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(8px,1.5vh,14px)}
+#publications .research-library-item{padding:clamp(10px,2vh,17px);border-radius:14px}
+#publications .research-library-item span{font-size:10px;line-height:1.2}
+#publications .research-library-item h3{font-size:clamp(14px,2.4vh,19px);line-height:1.2;margin:5px 0}
+#publications .research-library-item p{font-size:clamp(12px,1.9vh,15px);line-height:1.3}
+#founder .founder-grid{margin-top:12px;gap:24px;align-items:center}
+#founder .founder-photo img{width:100%;height:auto;max-height:48dvh;object-fit:contain}
+#founder .founder-copy h3{font-size:clamp(19px,3vh,28px);line-height:1.15;margin:0 0 6px}
+#founder .founder-copy p{font-size:clamp(12px,1.9vh,15px);line-height:1.35;margin:7px 0!important}
+#founder .founder-title{margin-bottom:8px}
+#contact .intro{font-size:13px;line-height:1.35;margin:0}
+#contact .contact-box{margin-top:12px;gap:12px}
+#contact .contact-card{padding:12px}
+#contact .official-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px;overflow-wrap:anywhere}
+#contact .info-block{margin:0;padding-top:0!important}
+#contact .info-block:last-child{grid-column:1/-1}
+#contact .contact-card textarea{height:60px;min-height:60px}
+}
+</style>
 </body>
 </html>
