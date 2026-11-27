@@ -2466,5 +2466,13 @@ header{position:relative}
 <script id="floating-section-navigation-script">
 (()=>{const ids=['home','about','pillars','focus','atencia','novaverse','publications','founder','contact'];const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);const next=document.getElementById('sectionNext');const home=document.getElementById('sectionHome');const behavior=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth';let target=null;let timer;function current(){const y=innerHeight*.45;let i=0;sections.forEach((s,j)=>{if(s.getBoundingClientRect().top<=y)i=j});if(scrollY+innerHeight>=document.documentElement.scrollHeight-3)i=sections.length-1;return i;}function sync(){next.disabled=(target===null?current():target)>=sections.length-1;}function go(i){target=i;clearTimeout(timer);const s=sections[i];history.pushState(null,'','#'+s.id);if(i===0)window.scrollTo({top:0,behavior:behavior()});else{const r=s.getBoundingClientRect();window.scrollTo({top:Math.max(0,scrollY+r.top-Math.max(0,(innerHeight-r.height)/2)),behavior:behavior()});}sync();timer=setTimeout(()=>{target=null;sync()},1000);}home.addEventListener('click',()=>go(0));next.addEventListener('click',()=>{const i=target===null?current():target;if(i<sections.length-1)go(i+1)});window.addEventListener('scroll',sync,{passive:true});window.addEventListener('resize',sync);window.addEventListener('hashchange',()=>{target=null;sync()});sync();})();
 </script>
+<style id="intro-video-feather">
+#introVideo{
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 14%,#000 86%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 14%,#000 86%,transparent 100%);
+  mask-composite:intersect;
+}
+</style>
 </body>
 </html>
