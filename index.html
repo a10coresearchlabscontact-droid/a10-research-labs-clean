@@ -1415,16 +1415,15 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 
       <div class="wrap atencia-grid">
 
-        <div class="atencia-logo-wrap" style="position:relative">
+        <div class="atencia-visual"><div class="atencia-logo-wrap">
 
           <img
             src="atencia-logo.PNG"
             alt="AtencIA — Atencio Intelligent Architecture"
           >
-          <button type="button" id="atenciaExplore" aria-label="Click to Explore AtencIA — private development, not yet available" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:3;box-sizing:border-box;width:142px;height:30px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:0 8px;font:600 12px/1 Arial,sans-serif;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;letter-spacing:.06em;cursor:pointer;margin:0">Click to Explore ↗</button>
-
-
-        </div>
+          </div>
+<button class="btn primary" <button type="button" id="atenciaExplore" aria-label="Click to Explore AtencIA — private development, not yet available">Click to Explore ↗</button>
+</div>
 
         <div class="atencia-copy">
 
@@ -2405,6 +2404,14 @@ header{position:relative}
 </style>
 <style id="hero-copy-offset">
 @media(min-width:951px){#home .hero-grid>div:first-child{transform:translateX(clamp(39px,calc(2.8vw + 15px),59px))}}
+</style>
+<style id="atencia-full-bleed">
+#atencia .atencia-visual{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+#atencia .atencia-logo-wrap{padding:0;overflow:hidden;width:min(100%,calc(65dvh * 1320 / 1480));border-radius:22px;flex:none}
+#atencia .atencia-logo-wrap img{display:block;width:100%;height:auto;max-width:none;max-height:none;border-radius:0;margin:0}
+#atenciaExplore{position:static;min-height:38px;padding:0 24px;cursor:pointer}
+#atenciaExplore:hover,#atenciaExplore:focus-visible{filter:brightness(1.25);box-shadow:0 0 24px #23d8ff99;transform:translateY(-2px)}
+@media(max-width:950px){#atencia .atencia-logo-wrap{width:min(100%,480px)}}
 </style>
 </body>
 </html>
