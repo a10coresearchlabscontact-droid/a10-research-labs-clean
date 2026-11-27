@@ -2331,7 +2331,7 @@ html{scroll-padding-top:0}
 }
 </style>
 <script>
-(()=>{function frame(id,behavior){const section=document.getElementById(id);if(!section||!matchMedia('(min-width:951px)').matches)return;const header=document.querySelector('header');const fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);const top=fixed?header.getBoundingClientRect().height:0;const available=innerHeight-top;const extra=Math.max(0,(available-section.getBoundingClientRect().height)/2);window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-top-extra),behavior});}document.addEventListener('click',e=>{const a=e.target.closest('.hero-actions a[href]');if(!a||!['#atencia','#focus','#contact'].includes(a.hash)||!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'',a.hash);frame(a.hash.slice(1),matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth');});})();
+(()=>{function frame(id,behavior){const section=document.getElementById(id);if(!section||!matchMedia('(min-width:951px)').matches)return;const header=document.querySelector('header');const fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);const top=fixed?header.getBoundingClientRect().height:0;const available=innerHeight-top;const extra=Math.max(0,(available-section.getBoundingClientRect().height)/2);window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-top-extra),behavior});}document.addEventListener('click',e=>{const a=e.target.closest('.hero-actions a[href], header a[href="#about"]');if(!a||!['#atencia','#focus','#contact','#about'].includes(a.hash)||!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'',a.hash);frame(a.hash.slice(1),matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth');});})();
 </script>
 <style id="home-framing">
 @media(min-width:951px){
@@ -2342,6 +2342,15 @@ header{position:relative}
 #home .hero-actions{margin-top:clamp(12px,3vh,28px);gap:10px}
 #home .hero-actions .btn{min-width:0;flex:1 1 0;padding:0 8px;min-height:40px;font-size:clamp(9px,.8vw,11px)}
 #home .hero-logo-image{max-height:78dvh;object-fit:contain}
+}
+</style>
+<style id="about-framing">
+@media(min-width:951px){
+#about{box-sizing:border-box;min-height:100dvh;display:flex;align-items:center;padding:clamp(18px,4vh,42px) 0;scroll-margin:0}
+#about h2{font-size:clamp(28px,min(4vw,7vh),58px);margin:10px 0 18px}
+#about .about-copy p{font-size:clamp(12px,2vh,16px);line-height:1.5;margin-bottom:clamp(8px,1.8vh,18px)}
+#about .about-card{padding:clamp(15px,3vh,30px)}
+#about .about-card li{font-size:clamp(12px,2vh,16px);padding:clamp(5px,1.4vh,14px) 0}
 }
 </style>
 </body>
