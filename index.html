@@ -1058,7 +1058,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
 
       <a class="brand" href="#home">
         <strong>A-10 C.O. RESEARCH LABS™</strong>
-        <svg class="brand-division" viewBox="0 0 300 12" role="img" aria-label="A-10 C.O. Enterprises Science and Technology Division"><text x="0" y="9.5" textLength="300" lengthAdjust="spacingAndGlyphs">A-10 C.O. ENTERPRISES · SCIENCE &amp; TECHNOLOGY DIVISION</text></svg>
+        <span class="brand-division">A-10 C.O. ENTERPRISES · SCIENCE &amp; TECHNOLOGY DIVISION</span>
       </a>
 
       <button class="menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false">Menu</button>
@@ -2482,6 +2482,10 @@ header{position:relative}
 </style>
 <style id="brand-division-alignment">
 .brand strong{white-space:nowrap;align-self:start}.brand{width:max-content}.brand-division{display:block;width:100%;max-width:100%;height:auto;overflow:visible;margin-top:4px;fill:var(--cyan);font-family:inherit;font-size:9px;font-weight:600}.brand{display:inline-grid;grid-template-columns:minmax(0,max-content)}.brand-division{width:0;min-width:100%}@media(max-width:700px){.brand{flex:0 1 auto;max-width:calc(100% - 76px)}.brand strong{font-size:clamp(9px,3vw,12px)}}
+</style>
+<style id="hero-left-feather-and-native-brand">
+.brand .brand-division{width:auto;min-width:0;max-width:none;font-size:8px;letter-spacing:0;line-height:1.35;font-weight:600;color:var(--cyan);white-space:nowrap;margin-top:3px;display:block}
+@media(min-width:951px){#home{background-image:linear-gradient(to bottom,transparent 65%,#041637 100%),linear-gradient(to right,#041637 0%,#041637 10%,rgba(4,22,55,.75) 14%,transparent 27%),url('a10-hero-wallpaper.png');background-size:100% 100%,100% 100%,90% auto;background-position:center,center,right top}}
 </style>
 </body>
 </html>
