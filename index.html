@@ -1991,6 +1991,12 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
         document.body.style.overflow = "auto";
         document.body.style.overflowX = "hidden";
         startAmbientAfterIntro();
+        if ((!location.hash || location.hash === "#home") && matchMedia("(min-width:951px)").matches) {
+          requestAnimationFrame(() => {
+            const hero = document.getElementById("home");
+            window.scrollTo({top:scrollY + hero.getBoundingClientRect().top,behavior:"instant"});
+          });
+        }
       }
 
 
@@ -2327,5 +2333,16 @@ html{scroll-padding-top:0}
 <script>
 (()=>{function frame(id,behavior){const section=document.getElementById(id);if(!section||!matchMedia('(min-width:951px)').matches)return;const header=document.querySelector('header');const fixed=header&&['fixed','sticky'].includes(getComputedStyle(header).position);const top=fixed?header.getBoundingClientRect().height:0;const available=innerHeight-top;const extra=Math.max(0,(available-section.getBoundingClientRect().height)/2);window.scrollTo({top:Math.max(0,scrollY+section.getBoundingClientRect().top-top-extra),behavior});}document.addEventListener('click',e=>{const a=e.target.closest('.hero-actions a[href]');if(!a||!['#atencia','#focus','#contact'].includes(a.hash)||!matchMedia('(min-width:951px)').matches)return;e.preventDefault();history.pushState(null,'',a.hash);frame(a.hash.slice(1),matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth');});})();
 </script>
+<style id="home-framing">
+@media(min-width:951px){
+header{position:relative}
+#home{box-sizing:border-box;min-height:100dvh;padding:clamp(18px,4vh,42px) 0;scroll-margin:0}
+#home h1{font-size:clamp(36px,min(5.5vw,10vh),82px);margin:12px 0 18px}
+#home .hero-copy{font-size:clamp(13px,2.2vh,18px);line-height:1.55}
+#home .hero-actions{margin-top:clamp(12px,3vh,28px);gap:10px}
+#home .hero-actions .btn{min-width:0;flex:1 1 0;padding:0 8px;min-height:40px;font-size:clamp(9px,.8vw,11px)}
+#home .hero-logo-image{max-height:78dvh;object-fit:contain}
+}
+</style>
 </body>
 </html>
