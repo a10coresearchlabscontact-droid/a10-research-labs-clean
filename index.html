@@ -1020,6 +1020,7 @@ footer{padding-bottom:90px}
        AMBIENT MUSIC
   ====================================================== -->
 
+  <audio id="novaVerseAudio" src="novaverse-anthem.mp3" loop preload="none"></audio>
   <audio id="ambientAudio" loop preload="auto">
     <source
       src="a10-labs-ambient-compatible.mp3"
@@ -1500,7 +1501,7 @@ footer{padding-bottom:90px}
         <div class="novaverse-banner">
 
           <button
-            id="novaverseZoomTrigger"
+            id="novaverseZoomTrigger" style="position:relative"
             type="button"
             aria-label="Open NovaVerse Saga banner in full-screen view"
           >
@@ -1509,6 +1510,7 @@ footer{padding-bottom:90px}
               src="novaverse-saga-banner.PNG"
               alt="NovaVerse Saga — Science Fiction Universe"
             >
+            <span style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:9px 20px;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font-weight:600;letter-spacing:.06em">Click to Explore ↗</span>
 
           </button>
 
@@ -1921,6 +1923,22 @@ footer{padding-bottom:90px}
         document.getElementById("lightboxClose");
 
       let lastFocusedElement = null;
+      const novaAudio = document.getElementById("novaVerseAudio");
+      let resumeLabs = false;
+      let audioTransition = 0;
+      function fadeAudio(audio, target, done) {
+        const token = audioTransition;
+        const initial = audio.volume;
+        const start = performance.now();
+        function tick(now) {
+          if (token !== audioTransition) return;
+          const progress = Math.min(1, (now-start)/1500);
+          audio.volume = initial + (target-initial)*progress;
+          if (progress < 1) requestAnimationFrame(tick);
+          else if (done) done();
+        }
+        requestAnimationFrame(tick);
+      }
 
 
       /* =====================================================
@@ -2084,6 +2102,17 @@ footer{padding-bottom:90px}
 
         lastFocusedElement =
           document.activeElement;
+        audioTransition++;
+        resumeLabs = !ambientAudio.paused && !userDisabledAmbient;
+        if (resumeLabs) {
+          novaAudio.currentTime = 0;
+          novaAudio.volume = 0;
+          novaAudio.play().then(() => {
+            if (!lightbox.classList.contains("is-open")) { novaAudio.pause(); return; }
+            fadeAudio(ambientAudio, 0, () => ambientAudio.pause());
+            fadeAudio(novaAudio, 0.34);
+          }).catch(error => console.warn("NovaVerse audio unavailable", error));
+        }
 
         lightbox.classList.add(
           "is-open"
@@ -2099,7 +2128,15 @@ footer{padding-bottom:90px}
 
       function closeLightbox() {
 
-        if (!lightbox) return;
+        if (!lightbox || !lightbox.classList.contains("is-open")) return;
+        audioTransition++;
+        fadeAudio(novaAudio, 0, () => novaAudio.pause());
+        if (resumeLabs && !userDisabledAmbient) {
+          if (ambientAudio.paused) ambientAudio.volume = 0;
+          ambientAudio.play().then(() => fadeAudio(ambientAudio, 0.34))
+            .catch(error => console.warn("Ambient resume unavailable", error));
+        }
+        resumeLabs = false;
 
         lightbox.classList.remove(
           "is-open"
