@@ -1518,7 +1518,7 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
             <span style="position:absolute;bottom:16px;right:16px;z-index:2;white-space:nowrap;padding:5px 12px;font-size:12px;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font-weight:600;letter-spacing:.06em">Click to Explore ↗</span>
 
           </button>
-          <a href="https://www.amazon.com/dp/B0H53S9Y31" target="_blank" rel="noopener noreferrer" style="position:absolute;bottom:16px;left:16px;z-index:3;white-space:nowrap;padding:5px 12px;font-size:12px;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font-weight:600;letter-spacing:.06em;text-decoration:none">Buy on Amazon ↗</a>
+          <button type="button" id="buyEdition" style="position:absolute;bottom:16px;left:16px;z-index:3;white-space:nowrap;padding:5px 12px;font-size:12px;border:1px solid #80caff;border-radius:24px;background:#071528ed;color:#fff;font-weight:600;letter-spacing:.06em;text-decoration:none;width:auto;cursor:pointer;margin:0" aria-haspopup="dialog">Buy on Amazon ↗</button>
 
         </div>
 
@@ -2272,5 +2272,13 @@ button:hover, button:focus-visible, a[href]:hover, a[href]:focus-visible { filte
  document.addEventListener('click', e => { if (e.target.closest(selector)) play(click); }, true);
 })();
 </script>
+<dialog id="editionDialog" style="background:#071528;color:white;border:1px solid #80caff;border-radius:18px;padding:24px;max-width:90vw">
+<form method="dialog"><button aria-label="Close" style="float:right;color:white;background:transparent;border:0;font-size:22px">×</button></form>
+<h2>Choose your edition</h2><p>NovaVerse Saga — Book I</p>
+<a style="display:block;padding:14px;color:#a8dfff" href="https://www.amazon.com/s?k=NovaVerse+William+Atencio+English+Edition&amp;i=stripbooks" target="_blank" rel="noopener noreferrer">English Edition — Search on Amazon ↗</a>
+<a style="display:block;padding:14px;color:#a8dfff" href="https://www.amazon.com/dp/B0H53S9Y31" target="_blank" rel="noopener noreferrer">Spanish Edition — Buy on Amazon ↗</a>
+</dialog>
+<style>#editionDialog::backdrop{background:#000a}#buyEdition:hover{box-shadow:0 0 14px #80caff}</style>
+<script>document.getElementById('buyEdition').addEventListener('click',()=>document.getElementById('editionDialog').showModal());</script>
 </body>
 </html>
